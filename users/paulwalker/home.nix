@@ -5,12 +5,8 @@
     firefox
     foliate
     iosevka
-    jetbrains-toolbox
     ledger
-    pfetch
   ];
-
-  fonts.fontconfig.enable = true;
 
   dconf = {
     enable = true;
@@ -21,21 +17,14 @@
       };
       "org/gnome/desktop/interface" = {
         clock-format = "12h";
-        #color-scheme = "prefer-dark";
       };
-      "org.gnome.desktop.peripherals.mouse" = { accel-profile = "flat"; };
+      "org/gnome/desktop/peripherals/mouse" = { accel-profile = "flat"; };
     };
   };
 
+  fonts.fontconfig.enable = true;
+
   programs = {
-    starship.enable = true;
-    eza = {
-      enable = true;
-      enableAliases = true;
-    };
-
-    go.enable = true;
-
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
 
@@ -51,21 +40,13 @@
         name = "Iosevka";
         size = 10;
       };
-      extraConfig = ''
-        map ctrl+shift+enter launch --cwd=current
-      '';
     };
 
     bash.enable = true;
-    bash.initExtra = ''
-      export PATH="$HOME/go/bin:$PATH"
-      pfetch
-    '';
 
     neovim = {
       enable = true;
       vimAlias = true;
-      extraPackages = with pkgs; [ gcc nodejs ];
     };
 
     git = {
