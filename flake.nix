@@ -10,7 +10,5 @@
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let lib = import ./lib inputs;
-    in lib.mkFlake ./.;
+  outputs = inputs: (import ./lib inputs).mkFlake ./.;
 }
