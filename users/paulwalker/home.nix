@@ -1,12 +1,6 @@
 { config, pkgs, lib, hostname, ... }: {
   home.username = "paulwalker";
-  home.packages = with pkgs; [
-    discord
-    firefox
-    foliate
-    iosevka
-    ledger
-  ];
+  home.packages = with pkgs; [ discord firefox foliate iosevka ledger ];
 
   dconf = {
     enable = true;
@@ -15,9 +9,7 @@
         picture-uri = "${./wallpaper.jpg}";
         picture-uri-dark = "${./wallpaper.jpg}";
       };
-      "org/gnome/desktop/interface" = {
-        clock-format = "12h";
-      };
+      "org/gnome/desktop/interface" = { clock-format = "12h"; };
       "org/gnome/desktop/peripherals/mouse" = { accel-profile = "flat"; };
     };
   };
@@ -47,10 +39,7 @@
     neovim = {
       enable = true;
       vimAlias = true;
-      plugins = with pkgs.vimPlugins; [
-	vim-surround
-        vim-nix
-      ];
+      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix ];
     };
 
     git = {
