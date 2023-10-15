@@ -8,11 +8,11 @@
         (builtins.filter (user: user.admin) (builtins.attrValues users)));
   };
 
-  security.sudo.extraRules = {
+  security.sudo.extraRules = [{
     users = [ "admin" ];
     commands = [{
       command = "ALL";
       options = [ "NOPASSWD" ];
     }];
-  };
+  }];
 }
