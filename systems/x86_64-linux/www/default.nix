@@ -6,6 +6,17 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
+  services.nginx = {
+    enable = true;
+    virtualHosts."www" = {
+      serverName = "_";
+      root = ./srv;
+    };
+  };
+
+  networking.firewall.enable = false;
+
+  # Hardware config
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
