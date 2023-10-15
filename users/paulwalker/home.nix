@@ -7,6 +7,7 @@
     iosevka
     jetbrains-toolbox
     ledger
+    pfetch
   ];
 
   dconf = {
@@ -42,6 +43,10 @@
     };
 
     bash.enable = true;
+    bash.bashrcExtra = ''
+      PS1='\[\e[96m\]\u\[\e[37m\]@\[\e[92m\]\h \[\e[93m\]\W\n\[\e[90m\]\$ \[\e[0m\]'
+      pfetch
+    '';
 
     neovim = {
       enable = true;

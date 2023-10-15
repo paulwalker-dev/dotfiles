@@ -48,9 +48,13 @@ in {
               inherit name;
               server =
                 builtins.pathExists /${dir}/systems/${system}/${name}/server;
-              value.profiles.system = {
-                user = "admin";
-                path = config.pkgs.deploy-rs.lib.activate.nixos config;
+              value = {
+                hostname = name;
+                profiles.system = {
+                  sshUser = "admin";
+                  user = "root";
+                  path = config.pkgs.deploy-rs.lib.activate.nixos config;
+                };
               };
             }) self.nixosConfigurations)));
 
