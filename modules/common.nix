@@ -5,6 +5,8 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = overlays;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
+
   networking.hostName = name;
   services.openssh = {
     enable = true;
@@ -18,5 +20,5 @@
       openssh.authorizedKeys.keys = sshKeys;
     }) users;
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }

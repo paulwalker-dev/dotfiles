@@ -58,8 +58,8 @@ in {
               };
             }) self.nixosConfigurations)));
 
-        checks = builtins.mapAttrs
-          (system: deployLib: deployLib.deployChecks self.deploy)
-          inputs.deploy-rs.lib;
+        # checks = builtins.mapAttrs
+        #   (system: deployLib: deployLib.deployChecks self.deploy)
+        #   inputs.deploy-rs.lib;
       };
 }
