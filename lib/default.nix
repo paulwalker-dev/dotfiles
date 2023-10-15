@@ -10,13 +10,12 @@ let
       in f n name) (builtins.attrNames (builtins.readDir dir)));
 in {
   mkFlake = dir:
-    let d = builtins.readDir dir;
+    let
+      overlays = import /${dir}/overlays.nix inputs;
+      d = builtins.readDir dir;
     in inputs.flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
-        devShells.default =
-          pkgs.mkShell { buildInputs = with pkgs; [ nixfmt ]; };
-      }) // {
+      let pkgs = import nixpkgs { inherit system overlays; };
+      in { devShells.default = pkgs.callPackage /${dir}/shell.nix { }; }) // {
         users = builtins.listToAttrs (dirView /${dir}/users (n: name: {
           inherit name;
           value = import /${dir}/users/${n};
@@ -34,13 +33,29 @@ in {
               value = nixpkgs.lib.nixosSystem {
                 inherit system;
                 specialArgs = {
-                  inherit name inputs;
+                  inherit name inputs overlays;
                   users = self.users;
                   modules = self.nixosModules;
-                  secrets = /${dir}/secrets;
                 };
                 modules = [ /${dir}/systems/${system}/${n} ];
               };
             }))) (builtins.attrNames (builtins.readDir /${dir}/systems))));
+
+        deploy.nodes = builtins.listToAttrs (builtins.filter (node: node.server)
+          (builtins.attrValues (builtins.mapAttrs (name: config:
+            let system = config.pkgs.system;
+            in {
+              inherit name;
+              server =
+                builtins.pathExists /${dir}/systems/${system}/${name}/server;
+              value.profiles.system = {
+                user = "admin";
+                path = config.pkgs.deploy-rs.lib.activate.nixos config;
+              };
+            }) self.nixosConfigurations)));
+
+        checks = builtins.mapAttrs
+          (system: deployLib: deployLib.deployChecks self.deploy)
+          inputs.deploy-rs.lib;
       };
 }

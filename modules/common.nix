@@ -1,8 +1,9 @@
-{ lib, pkgs, modules, users, inputs, name, ... }: {
+{ lib, pkgs, modules, users, inputs, name, overlays, ... }: {
   imports = [ modules.vm ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = overlays;
 
   networking.hostName = name;
   services.openssh = {
