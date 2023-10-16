@@ -20,5 +20,7 @@
       openssh.authorizedKeys.keys = sshKeys;
     }) users;
 
+  environment.systemPackages = with pkgs; [ file ];
+
   system.stateVersion = "23.05";
 }

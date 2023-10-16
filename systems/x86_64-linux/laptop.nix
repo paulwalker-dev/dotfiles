@@ -8,6 +8,14 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  networking.firewall.enable = true;
+  networking.hosts = {
+    "140.82.112.3" = [ "github.com" ];
+    "13.33.4.2" = [ "crates.io" ];
+    "146.75.38.137" = [ "static.crates.io" ];
+    "172.253.115.141" = [ "sum.golang.org" ];
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.systemd-boot.enable = true;

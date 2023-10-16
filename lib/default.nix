@@ -18,7 +18,13 @@ in {
       in { devShells.default = pkgs.callPackage /${dir}/shell.nix { }; }) // {
         users = builtins.listToAttrs (dirView /${dir}/users (n: name: {
           inherit name;
-          value = import /${dir}/users/${n};
+          value = (import /${dir}/users/${n}) // {
+            sshKeys = if builtins.pathExists /${dir}/users/${name}/ssh then
+              dirView /${dir}/users/${name}/ssh (keyname: _:
+                (builtins.readFile /${dir}/users/${name}/ssh/${keyname}))
+            else
+              [ ];
+          };
         }));
 
         nixosModules = builtins.listToAttrs (dirView /${dir}/modules (n: name: {
