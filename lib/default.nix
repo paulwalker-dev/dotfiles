@@ -10,9 +10,7 @@ let
       in f n name) (builtins.attrNames (builtins.readDir dir)));
 in {
   mkFlake = dir:
-    let
-      overlays = import /${dir}/overlays.nix inputs;
-      d = builtins.readDir dir;
+    let overlays = import /${dir}/overlays.nix inputs;
     in inputs.flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system overlays; };
       in { devShells.default = pkgs.callPackage /${dir}/shell.nix { }; }) // {

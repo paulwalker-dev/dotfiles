@@ -1,10 +1,10 @@
 { modules, lib, modulesPath, config, ... }: {
   imports = [
     modules.common
+    modules.personal
+    modules.gnome
     modules.tailscale
     modules.secureboot
-    modules.gnome
-    modules.home-manager
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 

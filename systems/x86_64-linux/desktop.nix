@@ -1,11 +1,11 @@
 { modules, config, lib, pkgs, modulesPath, ... }: {
   imports = [
     modules.common
-    modules.gaming
+    modules.personal
     modules.gnome
-    modules.home-manager
-    modules.nvidia
     modules.tailscale
+    modules.gaming
+    modules.nvidia
     modules.virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
