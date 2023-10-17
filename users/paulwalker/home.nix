@@ -4,6 +4,7 @@
     discord
     firefox
     foliate
+    go
     iosevka
     jetbrains-toolbox
     ledger
@@ -38,7 +39,7 @@
       };
       font = {
         name = "Iosevka";
-        size = 10;
+        size = 11;
       };
     };
 
