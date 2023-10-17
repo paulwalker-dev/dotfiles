@@ -1,4 +1,8 @@
-{ config, pkgs, lib, hostname, ... }: {
+{ config, pkgs, lib, ... }: {
+  imports = [
+    ./hyprland.nix
+  ];
+
   home.username = "paulwalker";
   home.packages = with pkgs; [
     discord
