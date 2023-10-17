@@ -51,7 +51,7 @@
     neovim = {
       enable = true;
       vimAlias = true;
-      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix ];
+      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger ];
     };
 
     git = {
