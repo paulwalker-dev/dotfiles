@@ -8,7 +8,6 @@
     discord
     firefox
     foliate
-    go
     iosevka
     jetbrains-toolbox
     ledger
@@ -49,6 +48,7 @@
 
     bash.enable = true;
     bash.bashrcExtra = ''
+      [[ $(tty) = /dev/tty1 ]] && exec Hyprland
       PS1='\[\e[96m\]\u\[\e[37m\]@\[\e[92m\]\h \[\e[93m\]\W\n\[\e[90m\]\$ \[\e[0m\]'
       pfetch
     '';
@@ -56,7 +56,12 @@
     neovim = {
       enable = true;
       vimAlias = true;
-      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger ];
+      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger yuck-vim ];
+      extraConfig = ''
+        set nu rnu
+
+        set shiftwidth=4 tabstop=4 expandtab
+      '';
     };
 
     git = {

@@ -2,9 +2,9 @@
   imports = [
     modules.common
     modules.personal
-    modules.gnome
     modules.tailscale
     modules.secureboot
+    modules.gaming
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 

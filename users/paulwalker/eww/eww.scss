@@ -1,0 +1,39 @@
+* {
+    all: unset;
+}
+
+.bar {
+    color: black;
+    font-family: MesloLGS Nerd Font Propo;
+    background-color: transparent;
+}
+
+.status {
+    background-color: black;
+    border-radius: 5px;
+    padding: 2px;
+
+    .info {
+        margin: 3px;
+        padding: 4px;
+        background-color: lightgray;
+        border-radius: 3px;
+    }
+
+    .current {
+        background-color: lightgreen;
+    }
+
+    .logo {
+        color: lightblue;
+        background-color: unset;
+    }
+
+    .battery {
+        background-color: lightgreen;
+    }
+
+    .time {
+        background-color: lightblue;
+    }
+}
