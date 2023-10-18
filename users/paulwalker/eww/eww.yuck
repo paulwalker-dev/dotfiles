@@ -34,7 +34,7 @@
     timeStamp))
 
 (defpoll timeStamp :interval "1s"
-  "date '+%H:%M:%S'")
+  "date '+%I:%M:%S %p'")
 
 (deflisten current_workspace :initial "1" "~/.config/eww/scripts/get-workspace")
 
