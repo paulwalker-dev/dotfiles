@@ -5,10 +5,12 @@
     jq
     pamixer
     socat
-    swaylock-effects
     swww
     waybar
     wofi
+    (pkgs.writeShellScriptBin "lock" ''
+      ${pkgs.swaylock}/bin/swaylock -c 000000
+    '')
     (nerdfonts.override { fonts = ["Meslo"]; })
   ];
 
@@ -111,7 +113,7 @@
     bind = $mainMod, R, exec, wofi --show drun
     bind = $mainMod, P, pseudo, # dwindle
     bind = $mainMod, J, togglesplit, # dwindle
-    bind = $mainMod, L, exec, ${./lock.sh}
+    bind = $mainMod, L, exec, lock
     
     # Move focus with mainMod + arrow keys
     bind = $mainMod, left, movefocus, l

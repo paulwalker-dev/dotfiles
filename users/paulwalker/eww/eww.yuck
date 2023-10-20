@@ -17,32 +17,49 @@
     :onclick "hyprctl dispatch workspace ${workspace.id}"
     (children)))
 
-(defvar showSound false)
-
 (defwidget metrics []
   (box :class "info metrics"
     " ${round(EWW_CPU.avg, 0)}%"))
 
+(defvar showVolume false)
+
 (defwidget volume []
-  (box
-    :class "info ${sound == 0 ? "muted" : "sound"}"
-    :orientation "h" :space-evenly false
-    (button :onclick "eww update showSound=${showSound ? "false" : "true"}"
-      {sound == 0 ? "󰝟" : "󰕾 ${sound}%"})
-    (revealer :reveal showSound :transition "slideright"
-      (overlay
-        (progress :value sound :width 100)
-        (scale
-          :min 0 :max 100 :value sound
-          :onchange "~/.config/eww/scripts/set-volume {}")))))
+  (eventbox
+    :onhover "eww update showVolume=true"
+    :onhoverlost "eww update showVolume=false"
+    (box
+      :class "info ${sound == 0 ? "muted" : "sound"}"
+      :orientation "h" :space-evenly false
+      {sound == 0 ? "󰝟" : "󰕾 ${sound}%"}
+      (revealer :reveal showVolume :transition "slideright"
+        (overlay
+          (progress :value sound :width 100)
+          (scale
+            :min 0 :max 100 :value sound
+            :onchange "~/.config/eww/scripts/set-volume {}"))))))
 
 (defwidget battery []
   (box :class "info battery"
     " ${EWW_BATTERY.BAT0.capacity}%"))
 
+(defvar showPower false)
+
 (defwidget power []
-  (button :class "info power" :onclick "shutdown now"
-    "󰐥"))
+  (eventbox
+    :onhover "eww update showPower=true"
+    :onhoverlost "eww update showPower=false"
+    (box :class "power"
+      :orientation "h" :space-evenly false
+      (revealer :reveal showPower :transition "slideleft"
+        (box :class "info menu" :orientation "h" :space-evenly false
+          (button :onclick "shutdown now"
+            "󰐥")
+          (button :onclick "hyprctl dispatch exit"
+            "󰍃")))
+      (button
+        :class "info icon ${showPower ? "open" : ""}"
+        :onclick "hyprctl dispatch exec lock"
+        "󰍜"))))
 
 (defwidget status []
   (box :class "status" :orientation "h" :halign "end" :space-evenly false

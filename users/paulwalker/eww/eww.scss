@@ -70,6 +70,31 @@ progressbar > trough {
     }
 
     .power {
-        background-color: yellow;
+        margin-left: 3px;
+        .menu {
+            margin-left: 0;
+            margin-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: gold;
+
+            padding: 0;
+            padding-left: 1px;
+            button {
+                margin-left: 4px;
+                padding-right: 4px;
+                border-right: 1px solid black;
+            }
+        }
+
+        .icon {
+            margin-left: 0;
+            background-color: yellow;
+        }
+
+        .open {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
     }
 }
