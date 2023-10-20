@@ -5,13 +5,14 @@
 
   home.username = "paulwalker";
   home.packages = with pkgs; [
-    discord
     firefox
     foliate
     iosevka
     jetbrains-toolbox
     ledger
     pfetch
+    signal-desktop
+    webcord
   ];
 
   dconf = {

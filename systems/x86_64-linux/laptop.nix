@@ -2,6 +2,7 @@
   imports = [
     modules.common
     modules.personal
+    modules.hyprland
     modules.tailscale
     modules.secureboot
     modules.gaming

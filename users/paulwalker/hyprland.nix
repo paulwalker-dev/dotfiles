@@ -1,8 +1,4 @@
-{ inputs, pkgs, ... }: {
-  imports = [
-    inputs.hyprland.homeManagerModules.default
-  ];
-
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     alsa-utils
     eww-wayland
@@ -13,18 +9,21 @@
     swww
     waybar
     wofi
+    (nerdfonts.override { fonts = ["Meslo"]; })
   ];
 
   home.file.".config/eww" = {
     enable = true;
     source = ./eww;
+    recursive = true;
   };
 
-  wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.extraConfig = ''
+  home.file.".config/hypr/hyprland.conf".enable = true;
+  home.file.".config/hypr/hyprland.conf".text = ''
     monitor = eDP-1, 1920x1080@60, 0x1080, 1
     monitor = HDMI-A-1, 1920x1080@60, 0x0, 1
 
+    exec-once = exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
     exec-once = eww daemon; eww open bar & swww init; swww img ${./wallpaper.jpg}
     
     env = XCURSOR_SIZE,24

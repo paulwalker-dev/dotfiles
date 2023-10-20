@@ -8,6 +8,10 @@
     background-color: transparent;
 }
 
+progressbar > trough {
+    min-width: 100px;
+}
+
 .status {
     background-color: black;
     border-radius: 5px;
@@ -35,5 +39,37 @@
 
     .time {
         background-color: lightblue;
+    }
+
+    trough {
+        margin: 7px;
+        border-radius: 3px;
+        progress {
+            border-radius: 3px;
+        }
+    }
+
+    .sound {
+        background-color: lightblue;
+
+        trough {
+            background-color: lightskyblue;
+            progress {
+                background-color: deepskyblue;
+                border-radius: 3px;
+            }
+        }
+    }
+
+    .muted {
+        background-color: crimson;
+
+        trough {
+            background-color: darkred;
+        }
+    }
+
+    .power {
+        background-color: yellow;
     }
 }

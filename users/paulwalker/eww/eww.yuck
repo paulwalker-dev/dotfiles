@@ -1,42 +1,69 @@
 (defwidget bar []
   (centerbox :orientation "h"
     (workspaces)
-    (box)
+    (control)
     (status)))
+
+(deflisten workspaces :initial "[]" "~/.config/eww/scripts/get-workspaces")
 
 (defwidget workspaces []
   (box :class "status" :orientation "h" :halign "start" :space-evenly false
     (box :class "info logo" "")
-    (workspace :num 1 "󰖟")
-    (workspace :num 2 "")
-    (workspace :num 3 "󱆀")))
+    (for workspace in workspaces
+      (workspace :workspace workspace {workspace.id}))))
 
-(defwidget workspace [num]
-  (button :class "info workspace ${num == current_workspace ? "current" : ""}"
-    :onclick "hyprctl dispatch workspace ${num}"
+(defwidget workspace [workspace]
+  (button :class "info workspace ${workspace.active ? "current" : ""}"
+    :onclick "hyprctl dispatch workspace ${workspace.id}"
     (children)))
 
-(defwidget status []
-  (box :class "status" :orientation "h" :halign "end" :space-evenly false
-    (battery)
-    (time)))
+(defvar showSound false)
+
+(defwidget metrics []
+  (box :class "info metrics"
+    " ${round(EWW_CPU.avg, 0)}%"))
+
+(defwidget volume []
+  (box
+    :class "info ${sound == 0 ? "muted" : "sound"}"
+    :orientation "h" :space-evenly false
+    (button :onclick "eww update showSound=${showSound ? "false" : "true"}"
+      {sound == 0 ? "󰝟" : "󰕾 ${sound}%"})
+    (revealer :reveal showSound :transition "slideright"
+      (overlay
+        (progress :value sound :width 100)
+        (scale
+          :min 0 :max 100 :value sound
+          :onchange "~/.config/eww/scripts/set-volume {}")))))
 
 (defwidget battery []
   (box :class "info battery"
-    "${EWW_BATTERY.BAT0.capacity}%"))
+    " ${EWW_BATTERY.BAT0.capacity}%"))
 
 (defwidget power []
   (button :class "info power" :onclick "shutdown now"
     "󰐥"))
 
+(defwidget status []
+  (box :class "status" :orientation "h" :halign "end" :space-evenly false
+    (metrics)
+    (volume)
+    (battery)
+    (power)))
+
 (defwidget time []
   (box :class "info time" :orientation "h" :space-evenly false
     timeStamp))
 
+(defwidget control []
+  (box :class "status" :orientation "h" :halign "end" :space-evenly false
+    (time)))
+
 (defpoll timeStamp :interval "1s"
   "date '+%I:%M:%S %p'")
 
-(deflisten current_workspace :initial "1" "~/.config/eww/scripts/get-workspace")
+(defpoll sound :interval "1s"
+  "pamixer --get-volume")
 
 (defwindow bar
   :monitor 0
@@ -44,7 +71,7 @@
               :x "0%"
               :y "1%"
               :width "99%"
-              :height "30px"
+              :height "0"
               :anchor "top center")
   :exclusive true
   (bar))
