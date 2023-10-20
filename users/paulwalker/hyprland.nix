@@ -8,9 +8,7 @@
     swww
     waybar
     wofi
-    (pkgs.writeShellScriptBin "lock" ''
-      ${pkgs.swaylock}/bin/swaylock -c 000000
-    '')
+    (pkgs.writeShellScriptBin "lock" "${pkgs.swaylock}/bin/swaylock -c 000000")
     (nerdfonts.override { fonts = ["Meslo"]; })
   ];
 

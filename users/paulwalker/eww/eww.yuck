@@ -52,14 +52,13 @@
       :orientation "h" :space-evenly false
       (revealer :reveal showPower :transition "slideleft"
         (box :class "info menu" :orientation "h" :space-evenly false
-          (button :onclick "shutdown now"
+          (button :class "shutdown" :onclick "shutdown now"
             "󰐥")
-          (button :onclick "hyprctl dispatch exit"
-            "󰍃")))
-      (button
-        :class "info icon ${showPower ? "open" : ""}"
-        :onclick "hyprctl dispatch exec lock"
-        "󰍜"))))
+          (button :class "logoff" :onclick "hyprctl dispatch exit"
+            "󰍃")
+          (button :class "lock" :onclick "hyprctl dispatch exec lock"
+            "")))
+      (box :class "info icon" "󰍜"))))
 
 (defwidget status []
   (box :class "status" :orientation "h" :halign "end" :space-evenly false

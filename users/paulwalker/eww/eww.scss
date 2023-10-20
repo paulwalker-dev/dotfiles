@@ -1,9 +1,11 @@
+@import "nord.scss"
+
 * {
     all: unset;
 }
 
 .bar {
-    color: black;
+    color: $nord0;
     font-family: MesloLGS Nerd Font Propo;
     background-color: transparent;
 }
@@ -13,32 +15,26 @@ progressbar > trough {
 }
 
 .status {
-    background-color: black;
+    background-color: $nord0;
     border-radius: 5px;
     padding: 2px;
 
     .info {
         margin: 3px;
         padding: 4px;
-        background-color: lightgray;
         border-radius: 3px;
+        background-color: $nord3;
+        color: $nord4;
     }
 
     .current {
-        background-color: lightgreen;
+        background-color: $nord7;
+        color: $nord0;
     }
 
     .logo {
-        color: lightblue;
+        color: $nord8;
         background-color: unset;
-    }
-
-    .battery {
-        background-color: lightgreen;
-    }
-
-    .time {
-        background-color: lightblue;
     }
 
     trough {
@@ -50,49 +46,57 @@ progressbar > trough {
     }
 
     .sound {
-        background-color: lightblue;
+        color: $nord0;
+        background-color: $nord8;
 
         trough {
-            background-color: lightskyblue;
+            background-color: $nord9;
             progress {
-                background-color: deepskyblue;
+                background-color: $nord10;
                 border-radius: 3px;
             }
         }
     }
 
     .muted {
-        background-color: crimson;
+        color: $nord0;
+        background-color: $nord13;
 
         trough {
-            background-color: darkred;
+            background-color: $nord12;
         }
     }
 
+    .battery {
+        color: $nord0;
+        background-color: $nord14;
+        margin-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
     .power {
-        margin-left: 3px;
+        margin-left: 1px;
         .menu {
+            color: $nord0;
             margin-left: 0;
             margin-right: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            background-color: gold;
-
+            border-radius: 0;
             padding: 0;
-            padding-left: 1px;
+
+            background-color: $nord8;
+
             button {
-                margin-left: 4px;
+                padding-left: 4px;
                 padding-right: 4px;
-                border-right: 1px solid black;
+                border-right: 1px solid $nord0;
             }
         }
 
         .icon {
+            color: $nord0;
             margin-left: 0;
-            background-color: yellow;
-        }
-
-        .open {
+            background-color: $nord9;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
