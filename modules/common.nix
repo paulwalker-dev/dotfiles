@@ -20,7 +20,7 @@
       openssh.authorizedKeys.keys = sshKeys;
     }) users;
 
-  environment.systemPackages = with pkgs; [ file ];
+  environment.systemPackages = with pkgs; [ file pstree ];
 
   system.stateVersion = "23.05";
 }

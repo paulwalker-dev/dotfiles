@@ -1,10 +1,9 @@
 { config, pkgs, lib, ... }: {
-  imports = [
-    ./hyprland.nix
-  ];
+  imports = [ ./hyprland.nix ];
 
   home.username = "paulwalker";
   home.packages = with pkgs; [
+    cider
     firefox
     foliate
     iosevka
@@ -57,11 +56,15 @@
     neovim = {
       enable = true;
       vimAlias = true;
-      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger yuck-vim ];
+      plugins = with pkgs.vimPlugins; [
+        vim-surround
+        vim-nix
+        vim-ledger
+        yuck-vim
+      ];
       extraConfig = ''
-        set nu rnu
-
         set shiftwidth=4 tabstop=4 expandtab
+        set number relativenumber
       '';
     };
 
