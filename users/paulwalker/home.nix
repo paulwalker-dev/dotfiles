@@ -3,28 +3,18 @@
 
   home.username = "paulwalker";
   home.packages = with pkgs; [
-    cider
     firefox
     foliate
-    iosevka
-    jetbrains-toolbox
+    go
+    jetbrains.clion
+    jetbrains.goland
     ledger
     pfetch
+    prismlauncher
     signal-desktop
     webcord
+    (nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
-
-  dconf = {
-    enable = true;
-    settings = {
-      "org/gnome/desktop/background" = {
-        picture-uri = "${./wallpaper.jpg}";
-        picture-uri-dark = "${./wallpaper.jpg}";
-      };
-      "org/gnome/desktop/interface" = { clock-format = "12h"; };
-      "org/gnome/desktop/peripherals/mouse" = { accel-profile = "flat"; };
-    };
-  };
 
   fonts.fontconfig.enable = true;
 
@@ -41,8 +31,8 @@
         initial_window_height = "24c";
       };
       font = {
-        name = "Iosevka";
-        size = 11;
+        name = "MesloLGS Nerd Font Mono";
+        size = 10;
       };
     };
 

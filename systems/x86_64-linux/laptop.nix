@@ -4,8 +4,8 @@
     modules.personal
     modules.hyprland
     modules.tailscale
-    modules.secureboot
     modules.gaming
+    modules.secureboot
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -51,6 +51,9 @@
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
+
+  services.tlp.enable = true;
+  services.tlp.settings = { CPU_SCALING_GOVERNOR_ON_BAT = "powersave"; };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =

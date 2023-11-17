@@ -2,6 +2,7 @@
   imports = [ modules.home-manager ];
 
   services.printing.enable = true;
+  services.flatpak.enable = true;
   programs.dconf.enable = true;
 
   hardware.pulseaudio.enable = false;

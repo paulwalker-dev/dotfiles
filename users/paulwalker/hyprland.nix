@@ -103,6 +103,10 @@
         workspace_swipe = true
     }
 
+    misc {
+        force_default_wallpaper = 0
+    }
+
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     $mainMod = SUPER
 
