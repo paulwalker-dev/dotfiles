@@ -4,4 +4,5 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   environment.systemPackages = with pkgs.gnomeExtensions; [ appindicator ];
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ table ];
 }

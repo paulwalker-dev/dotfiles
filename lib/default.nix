@@ -10,9 +10,8 @@ let
       in f n name) (builtins.attrNames (builtins.readDir dir)));
 in {
   mkFlake = dir:
-    let overlays = import /${dir}/overlays.nix inputs;
-    in inputs.flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system overlays; };
+    inputs.flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
       in { devShells.default = pkgs.callPackage /${dir}/shell.nix { }; }) // {
         users = builtins.listToAttrs (dirView /${dir}/users (n: name: {
           inherit name;
@@ -37,33 +36,12 @@ in {
               value = nixpkgs.lib.nixosSystem {
                 inherit system;
                 specialArgs = {
-                  inherit name inputs overlays;
+                  inherit name inputs;
                   users = self.users;
                   modules = self.nixosModules;
                 };
                 modules = [ /${dir}/systems/${system}/${n} ];
               };
             }))) (builtins.attrNames (builtins.readDir /${dir}/systems))));
-
-        deploy.nodes = builtins.listToAttrs (builtins.filter (node: node.server)
-          (builtins.attrValues (builtins.mapAttrs (name: config:
-            let system = config.pkgs.system;
-            in {
-              inherit name;
-              server =
-                builtins.pathExists /${dir}/systems/${system}/${name}/server;
-              value = {
-                hostname = name;
-                profiles.system = {
-                  sshUser = "admin";
-                  user = "root";
-                  path = config.pkgs.deploy-rs.lib.activate.nixos config;
-                };
-              };
-            }) self.nixosConfigurations)));
-
-        # checks = builtins.mapAttrs
-        #   (system: deployLib: deployLib.deployChecks self.deploy)
-        #   inputs.deploy-rs.lib;
       };
 }

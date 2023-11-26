@@ -1,9 +1,15 @@
 { modules, ... }: {
   imports = [ modules.home-manager ];
 
-  services.printing.enable = true;
   services.flatpak.enable = true;
   programs.dconf.enable = true;
+
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;

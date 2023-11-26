@@ -1,9 +1,8 @@
-{ lib, pkgs, modules, users, inputs, name, overlays, ... }: {
+{ lib, pkgs, modules, users, inputs, name, ... }: {
   imports = [ modules.vm ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = overlays;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
 

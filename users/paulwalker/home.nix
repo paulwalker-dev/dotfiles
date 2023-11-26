@@ -4,7 +4,6 @@
   home.username = "paulwalker";
   home.packages = with pkgs; [
     firefox
-    foliate
     go
     jetbrains.clion
     jetbrains.goland
@@ -17,6 +16,8 @@
   ];
 
   fonts.fontconfig.enable = true;
+
+  services.syncthing.enable = true;
 
   programs = {
     direnv.enable = true;
