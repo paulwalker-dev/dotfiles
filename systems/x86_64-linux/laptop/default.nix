@@ -8,7 +8,7 @@
     modules.virt
     modules.disko
     (modulesPath + "/installer/scan/not-detected.nix")
-    (import ./disk.nix { disks = [ "/dev/sda" "/dev/sdb" ]; })
+    (import ./disk.nix { disks = [ "/dev/nvme0n1" ]; })
   ];
 
   networking.firewall.enable = true;
