@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-eww update sound=$1
-pamixer --set-volume $1

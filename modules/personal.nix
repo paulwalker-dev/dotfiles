@@ -23,10 +23,4 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
   hardware.bluetooth.settings = { General = { ControllerMode = "dual"; }; };
-
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
 }

@@ -1,23 +1,14 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ./hyprland.nix ];
-
   home.username = "paulwalker";
   home.packages = with pkgs; [
     firefox
-    go
-    jetbrains.clion
-    jetbrains.goland
     ledger
     pfetch
-    prismlauncher
-    signal-desktop
     webcord
     (nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
 
   fonts.fontconfig.enable = true;
-
-  services.syncthing.enable = true;
 
   programs = {
     direnv.enable = true;
@@ -39,7 +30,6 @@
 
     bash.enable = true;
     bash.bashrcExtra = ''
-      [[ $(tty) = /dev/tty1 ]] && exec Hyprland
       PS1='\[\e[96m\]\u\[\e[37m\]@\[\e[92m\]\h \[\e[93m\]\W\n\[\e[90m\]\$ \[\e[0m\]'
       pfetch
     '';
@@ -51,7 +41,6 @@
         vim-surround
         vim-nix
         vim-ledger
-        yuck-vim
       ];
       extraConfig = ''
         set shiftwidth=4 tabstop=4 expandtab
