@@ -11,7 +11,35 @@
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.systemd-boot.enable = true;
 
-  # TODO Reinstall NixOS on laptop
+  boot.initrd.availableKernelModules =
+    [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
+  boot.initrd.luks.devices = {
+    cryptlvm = {
+      device = "/dev/nvme0n1p2";
+      preLVM = true;
+    };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/system/nixos";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/system/home";
+    fsType = "btrfs";
+  };
+
+  swapDevices = [{ device = "/dev/system/swap"; }];
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
