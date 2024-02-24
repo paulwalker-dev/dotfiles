@@ -4,6 +4,7 @@
     modules.personal
     modules.gnome
     modules.tailscale
+    modules.virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -40,6 +41,8 @@
   };
 
   swapDevices = [{ device = "/dev/system/swap"; }];
+
+  programs.steam.enable = true;
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;

@@ -5,6 +5,10 @@
     ledger
     pfetch
     (nerdfonts.override { fonts = [ "Meslo" ]; })
+
+    distrobox
+    taskwarrior
+    jetbrains-toolbox
   ];
 
   fonts.fontconfig.enable = true;
@@ -20,9 +24,16 @@
     };
   };
 
+  services.syncthing = {
+    enable = true;
+  };
+
   programs = {
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
+
+    zoxide.enable = true;
+    zoxide.options = ["--cmd cd"];
 
     kitty = {
       enable = true;
