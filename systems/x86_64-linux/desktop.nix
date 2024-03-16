@@ -1,7 +1,9 @@
 { modules, lib, modulesPath, config, ... }: {
   imports = [
     modules.common
-    modules.tailscale
+    modules.personal
+    modules.plasma
+    modules.virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -10,23 +12,27 @@
   boot.loader.systemd-boot.enable = true;
 
   boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.kernelModules = [ "kvm-intel" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f321a176-6221-4eaa-bb1b-fe88836bced6";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/156897d7-7144-4f8c-8ea8-a143e11a4344";
+    fsType = "btrfs";
+    options = [ "subvol=@" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/43C8-62BE";
+    device = "/dev/disk/by-uuid/AFEB-0E8E";
     fsType = "vfat";
   };
 
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/750bf648-c80f-43ac-a3d8-c8b4219f9207"; }];
+
   networking.useDHCP = lib.mkDefault true;
-  networking.networkmanager.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -35,7 +35,7 @@ in {
               inherit name;
               value = nixpkgs.lib.nixosSystem {
                 inherit system;
-                specialArgs = {
+                specialArgs.dotfiles = {
                   inherit name inputs;
                   users = self.users;
                   modules = self.nixosModules;

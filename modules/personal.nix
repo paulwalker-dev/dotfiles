@@ -1,5 +1,5 @@
-{ modules, ... }: {
-  imports = [ modules.home-manager ];
+{ dotfiles, ... }: {
+  imports = with dotfiles.modules; [ home-manager ];
 
   services.flatpak.enable = true;
   programs.dconf.enable = true;

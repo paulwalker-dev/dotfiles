@@ -3,7 +3,6 @@
     modules.common
     modules.personal
     modules.gnome
-    modules.tailscale
     modules.virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];

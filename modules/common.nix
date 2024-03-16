@@ -1,6 +1,4 @@
-{ lib, pkgs, modules, users, inputs, name, ... }: {
-  imports = [ modules.vm ];
-
+{ dotfiles, lib, pkgs, modules, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
@@ -17,7 +15,7 @@
       isNormalUser = true;
       extraGroups = if admin then [ "wheel" ] else [ ];
       openssh.authorizedKeys.keys = sshKeys;
-    }) users;
+    }) dotfiles.users;
 
   system.stateVersion = "23.05";
 }
