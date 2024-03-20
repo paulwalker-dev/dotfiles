@@ -1,8 +1,12 @@
-{ dotfiles, ... }: {
+{ dotfiles, pkgs, ... }: {
   imports = with dotfiles.modules; [ home-manager ];
 
   services.flatpak.enable = true;
   programs.dconf.enable = true;
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ anthy ];
+  };
 
   services.printing.enable = true;
   services.avahi = {
@@ -21,6 +25,5 @@
   };
 
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = false;
   hardware.bluetooth.settings = { General = { ControllerMode = "dual"; }; };
 }

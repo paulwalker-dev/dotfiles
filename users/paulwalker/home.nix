@@ -2,14 +2,22 @@
   home.username = "paulwalker";
   home.packages = with pkgs; [
     firefox
+    jetbrains-toolbox
     (nerdfonts.override { fonts = [ "Meslo" ]; })
+    emacs-gtk
+
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
   ];
 
   fonts.fontconfig.enable = true;
 
+  services.syncthing.enable = true;
+
   programs = {
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
+    bash.enable = true;
 
     kitty = {
       enable = true;
@@ -23,6 +31,16 @@
         name = "MesloLGS Nerd Font Mono";
         size = 10;
       };
+    };
+
+    neovim = {
+      enable = true;
+      vimAlias = true;
+      plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger ];
+      extraConfig = ''
+        set shiftwidth=4 tabstop=4 expandtab
+        set number relativenumber
+      '';
     };
 
     git = {

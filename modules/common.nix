@@ -1,10 +1,8 @@
-{ dotfiles, lib, pkgs, modules, ... }: {
+{ dotfiles, lib, pkgs, ... }: {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" ];
-
-  networking.hostName = name;
+  networking.hostName = dotfiles.hostname;
   services.openssh = {
     enable = true;
     settings = { PasswordAuthentication = false; };
@@ -18,4 +16,6 @@
     }) dotfiles.users;
 
   system.stateVersion = "23.05";
+
+  environment.systemPackages = with pkgs; [ vim ];
 }

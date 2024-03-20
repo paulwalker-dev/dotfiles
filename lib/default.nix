@@ -35,10 +35,13 @@ in {
               inherit name;
               value = nixpkgs.lib.nixosSystem {
                 inherit system;
-                specialArgs.dotfiles = {
-                  inherit name inputs;
-                  users = self.users;
-                  modules = self.nixosModules;
+                specialArgs = {
+                  dotfiles = {
+                    inherit inputs nixpkgs;
+                    hostname = name;
+                    users = self.users;
+                    modules = self.nixosModules;
+                  };
                 };
                 modules = [ /${dir}/systems/${system}/${n} ];
               };

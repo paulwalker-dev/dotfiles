@@ -1,9 +1,10 @@
-{ modules, lib, modulesPath, config, ... }: {
-  imports = [
-    modules.common
-    modules.personal
-    modules.plasma
-    modules.virt
+{ dotfiles, lib, modulesPath, config, ... }: {
+  imports = with dotfiles.modules; [
+    common
+    personal
+    gaming
+    gnome
+    virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -30,6 +31,8 @@
     [{ device = "/dev/disk/by-uuid/750bf648-c80f-43ac-a3d8-c8b4219f9207"; }];
 
   networking.useDHCP = lib.mkDefault true;
+
+  services.unifi.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

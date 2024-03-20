@@ -1,9 +1,9 @@
-{ modules, lib, modulesPath, config, ... }: {
-  imports = [
-    modules.common
-    modules.personal
-    modules.gnome
-    modules.virt
+{ dotfiles, lib, modulesPath, config, ... }: {
+  imports = with dotfiles.modules; [
+    common
+    personal
+    gnome
+    virt
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
