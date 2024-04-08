@@ -1,13 +1,20 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, dotfiles, ... }: {
+  #imports = [ dotfiles.inputs.nixvim.homeManagerModules.nixvim ];
+
   home.username = "paulwalker";
   home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "Meslo" ]; })
+    aerc
+    anki
+    discord
     firefox
     jetbrains-toolbox
-    (nerdfonts.override { fonts = [ "Meslo" ]; })
-    emacs-gtk
-
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
+    rnote
+    tmux
+    vscode-fhs
+    virt-viewer
   ];
 
   fonts.fontconfig.enable = true;
@@ -36,12 +43,22 @@
     neovim = {
       enable = true;
       vimAlias = true;
+      defaultEditor = true;
       plugins = with pkgs.vimPlugins; [ vim-surround vim-nix vim-ledger ];
       extraConfig = ''
         set shiftwidth=4 tabstop=4 expandtab
         set number relativenumber
       '';
     };
+
+    #nixvim = {
+    #  enable = true;
+    #  plugins.surround.enable = true;
+    #  opts = {
+    #    number = true;
+    #    relativenumber = true;
+    #  };
+    #};
 
     git = {
       enable = true;

@@ -1,5 +1,5 @@
-{ dotfiles, config, ... }: {
-  imports = [ dotfiles.inputs.home-manager.nixosModules.home-manager ];
+{ dotfiles, config, pkgs, ... }: {
+  imports = [ dotfiles.inputs.home-manager.nixosModules.default ];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

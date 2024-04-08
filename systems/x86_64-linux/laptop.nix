@@ -17,34 +17,22 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.initrd.luks.devices = {
-    cryptlvm = {
-      device = "/dev/nvme0n1p2";
-      preLVM = true;
-    };
-  };
-
   fileSystems."/" = {
-    device = "/dev/system/nixos";
-    fsType = "btrfs";
+    device = "/dev/disk/by-uuid/cc86c783-57e0-43ec-9043-ba16aaea8577";
+    fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-uuid/3409-8007";
     fsType = "vfat";
   };
 
-  fileSystems."/home" = {
-    device = "/dev/system/home";
-    fsType = "btrfs";
-  };
-
-  swapDevices = [{ device = "/dev/system/swap"; }];
-
-  programs.steam.enable = true;
+  swapDevices = [ ];
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
+
+  users.users.paulwalker.extraGroups = [ "dialout" ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =
