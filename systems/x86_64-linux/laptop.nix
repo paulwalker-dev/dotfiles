@@ -4,6 +4,8 @@
     personal
     gnome
     virt
+    gaming
+    japanese
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -13,26 +15,23 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/cc86c783-57e0-43ec-9043-ba16aaea8577";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/22fc0d96-ed87-448e-82be-bd27eb187542";
+    fsType = "btrfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3409-8007";
+    device = "/dev/disk/by-uuid/B11C-096F";
     fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
   };
 
   swapDevices = [ ];
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
-
-  users.users.paulwalker.extraGroups = [ "dialout" ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode =

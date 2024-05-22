@@ -4,14 +4,6 @@
   services.flatpak.enable = true;
   services.tailscale.enable = true;
   programs.dconf.enable = true;
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      anthy
-      table
-      (pkgs.callPackage ../pkgs/ibus-table-sitelen-pona.nix { })
-    ];
-  };
 
   services.printing.enable = true;
   services.avahi = {

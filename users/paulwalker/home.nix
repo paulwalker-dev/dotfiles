@@ -1,25 +1,14 @@
 { config, pkgs, lib, dotfiles, ... }: {
-  #imports = [ dotfiles.inputs.nixvim.homeManagerModules.nixvim ];
-
   home.username = "paulwalker";
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Meslo" ]; })
-    aerc
     anki
     discord
     firefox
-    jetbrains-toolbox
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    rnote
     tmux
-    vscode-fhs
-    virt-viewer
   ];
 
   fonts.fontconfig.enable = true;
-
-  services.syncthing.enable = true;
 
   programs = {
     direnv.enable = true;
@@ -50,15 +39,6 @@
         set number relativenumber
       '';
     };
-
-    #nixvim = {
-    #  enable = true;
-    #  plugins.surround.enable = true;
-    #  opts = {
-    #    number = true;
-    #    relativenumber = true;
-    #  };
-    #};
 
     git = {
       enable = true;
