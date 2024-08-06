@@ -4,7 +4,6 @@
     personal
     gnome
     virt
-    gaming
     japanese
     (modulesPath + "/installer/scan/not-detected.nix")
   ];

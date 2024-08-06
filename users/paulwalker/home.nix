@@ -2,8 +2,6 @@
   home.username = "paulwalker";
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Meslo" ]; })
-    anki
-    discord
     firefox
     tmux
   ];

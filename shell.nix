@@ -1,1 +1,1 @@
-{ pkgs, ... }: pkgs.mkShell { buildInputs = with pkgs; [ nixfmt ripgrep ]; }
+{ pkgs, ... }: pkgs.mkShell { buildInputs = with pkgs; [ nixfmt-classic ]; }
