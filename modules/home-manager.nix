@@ -3,7 +3,10 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit dotfiles; };
+  home-manager.extraSpecialArgs = {
+    inherit dotfiles;
+    darwin = false;
+  };
 
   home-manager.users =
     builtins.mapAttrs (_: { home, ... }: home) dotfiles.users;

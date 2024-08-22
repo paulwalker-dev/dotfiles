@@ -46,5 +46,20 @@ in {
                 modules = [ /${dir}/systems/${system}/${n} ];
               };
             }))) (builtins.attrNames (builtins.readDir /${dir}/systems))));
+
+        darwinConfigurations = builtins.listToAttrs (dirView /${dir}/darwin
+          (n: name: {
+            inherit name;
+            value = inputs.nix-darwin.lib.darwinSystem {
+              specialArgs = {
+                dotfiles = {
+                  inherit inputs nixpkgs;
+                  hostname = name;
+                  users = self.users;
+                };
+              };
+              modules = [ /${dir}/darwin/common.nix /${dir}/darwin/${n} ];
+            };
+          }));
       };
 }
