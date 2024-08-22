@@ -1,6 +1,7 @@
 { config, pkgs, lib, dotfiles, darwin, ... }: {
   home.username = "paulwalker";
-  home.packages = with pkgs; [ tmux ] ++ (if !darwin then [ firefox ] else [ ]);
+  home.packages = with pkgs;
+    [ tmux ] ++ (if !darwin then [ anki firefox ] else [ ]);
 
   fonts.fontconfig.enable = true;
 
